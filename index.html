@@ -19,9 +19,29 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <style>
       body {
         font-family: "Cairo", sans-serif;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+      }
+      .scroll-section {
+        scroll-snap-align: start;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+      .scroll-section.active {
+        opacity: 1;
       }
       .gradient-background {
         background-image: linear-gradient(
@@ -39,6 +59,75 @@
         bottom: 0;
         z-index: -1;
       }
+      #product-bag.dragging {
+        filter: drop-shadow(0 0 15px #fbbf24);
+        cursor: grabbing;
+      }
+      .capsule {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-image: url("./kabsul.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        animation: fall 1s linear;
+      }
+      @keyframes fall {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+      }
+      #dishwasher.shaking {
+        animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both infinite;
+      }
+      @keyframes shake {
+        10%,
+        90% {
+          transform: translate3d(-1px, 0, 0);
+        }
+        20%,
+        80% {
+          transform: translate3d(2px, 0, 0);
+        }
+        30%,
+        50%,
+        70% {
+          transform: translate3d(-4px, 0, 0);
+        }
+        40%,
+        60% {
+          transform: translate3d(4px, 0, 0);
+        }
+      }
+      .bubble {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: rise 2s ease-in-out infinite;
+      }
+      @keyframes rise {
+        from {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-150px);
+          opacity: 0;
+        }
+      }
+      #clean-dishes {
+        transition: opacity 1s ease-in-out;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
     </style>
     <style>
       body {
@@ -48,100 +137,359 @@
   </head>
   <body class="bg-gray-900 text-white relative overflow-x-hidden">
     <div class="gradient-background"></div>
-    <div class="container mx-auto px-6 py-12 relative z-10">
-      <header class="mb-8">
-        <h1 class="text-3xl font-bold">ÖZAX</h1>
-      </header>
-      <main>
-        <section
-          class="text-center md:text-right md:flex md:items-center md:justify-between"
-        >
-          <div class="md:w-1/2 md:pr-10">
-            <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              كبسولات غسيل صحون قوية ومبتكرة
-            </h2>
-            <p class="text-lg text-gray-300 mb-8">
-              تجمع بين المنظف ومساعد الشطف وملمع الصحون
-            </p>
-            <a
-              class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300 inline-block"
-              href="#"
-              >اطلب الآن</a
-            >
+    <div
+      class="scroll-section active"
+      id="section1"
+    >
+      <div class="container mx-auto px-6 py-12 relative z-10">
+        <header class="mb-8">
+          <h1 class="text-6xl font-bold">SÖZAX</h1>
+        </header>
+        <main>
+          <section
+            class="text-center md:text-right md:flex md:items-center md:justify-between"
+          >
+            <div class="md:w-1/2 md:pr-10">
+              <h2 class="text-5xl md:text-5xl font-bold leading-tight mb-4">
+                كبسولات غسيل صحون قوية ومبتكرة
+              </h2>
+              <p class="text-lg text-gray-300 mb-8">
+                تجمع بين المنظف ومساعد الشطف وملمع الصحون
+              </p>
+              <div class="flex gap-4">
+                <a
+                  class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300 inline-block"
+                  href="#"
+                  >اطلب الآن</a
+                >
+                <a
+                  class="border-2 border-yellow-400 text-yellow-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-400 hover:text-gray-900 transition duration-300 inline-block"
+                  href="path-to-details.pdf"
+                  download
+                  >تحميل التفاصيل</a
+                >
+              </div>
+            </div>
+
+            <div class="mt-10 md:mt-0 md:w-1/2 flex justify-center">
+              <img
+                alt="كبسولة غسيل صحون"
+                class="w-full max-w-sm transform -rotate-12"
+                src="./kabsul.png"
+              />
+            </div>
+          </section>
+          <section class="mt-16">
+            <ul class="space-y-4 text-3xl">
+              <li class="flex items-center">
+                <span class="material-icons text-green-400 mr-3"
+                  >check_circle</span
+                >
+                <span>الأكبر في السوق</span>
+              </li>
+              <li class="flex items-center">
+                <span class="material-icons text-green-400 mr-3"
+                  >check_circle</span
+                >
+                <span>سعر تنافسي للغاية</span>
+              </li>
+              <li class="flex items-center">
+                <span class="material-icons text-green-400 mr-3"
+                  >check_circle</span
+                >
+                <span>أداء تنظيف ممتاز</span>
+              </li>
+            </ul>
+          </section>
+          <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce"
+          >
+            <span class="text-sm">اسحب للأسفل</span>
+            <span class="material-icons">keyboard_arrow_down</span>
           </div>
-          <div class="mt-10 md:mt-0 md:w-1/2 flex justify-center">
-            <img
-              alt="كبسولة غسيل صحون"
-              class="w-full max-w-sm transform -rotate-12"
-              src="./kabsul.png"
-            />
-          </div>
-        </section>
-        <section class="mt-16">
-          <ul class="space-y-4 text-lg">
-            <li class="flex items-center">
-              <span class="material-icons text-green-400 mr-3"
-                >check_circle</span
-              >
-              <span>الأكبر في السوق</span>
-            </li>
-            <li class="flex items-center">
-              <span class="material-icons text-green-400 mr-3"
-                >check_circle</span
-              >
-              <span>سعر تنافسي للغاية</span>
-            </li>
-            <li class="flex items-center">
-              <span class="material-icons text-green-400 mr-3"
-                >check_circle</span
-              >
-              <span>أداء تنظيف ممتاز</span>
-            </li>
-          </ul>
-        </section>
-        <section
-          class="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8 text-center"
-        >
-          <div class="flex flex-col items-center">
-            <img
-              alt="شعار ISO"
-              class="h-12 w-12 mb-3"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeelg9Jo6LtzfrwxnJllJZ3dSRE2BzBgUqeizNuP_WDGMSbelRp_Qics8X96HIz5sj_M2F_9gJTcI83OgKY2mq_UQJ-WQUftkDmP_Jdd3hIxHUIRfGBm51z78inkIfI3ttWCvnU5w81tJDOm2DGVAjtUlzgBn3gFPXh5eFtagO74oy2UTis6KIK9r-wI6eH1v52FXJlWmDjPoy8ZQuAvgyS-FibRsjvO1soj6VfIbqsrUPdLasaVDxMuVkcCERz5IsUyeFukWXKMk"
-            />
-          </div>
-          <div class="flex flex-col items-center">
-            <span class="material-icons text-3xl mb-3">place</span>
-            <p>صنع في تركيا</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <span class="material-icons text-3xl mb-3">leaderboard</span>
-            <p>قدرة إنتاجية عالية</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <span class="material-icons text-green-400 text-3xl mb-3"
-              >check_circle</span
-            >
-            <p>صنع في تركيا</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <span class="material-icons text-3xl mb-3">language</span>
-            <p>طلبات عالمية</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <span class="material-icons text-3xl mb-3">thumb_up_alt</span>
-            <p>قبول الطلبات</p>
-          </div>
-        </section>
-        <section class="mt-16 flex justify-between items-end">
-          <div>
-            <p class="text-5xl font-bold">15 غ</p>
-          </div>
-          <div class="text-right">
-            <p class="text-2xl font-bold">4,5 × 6,5 سم</p>
-            <p class="text-gray-400">Jümm</p>
-          </div>
-        </section>
-      </main>
+        </main>
+      </div>
     </div>
+    <div
+      class="scroll-section"
+      id="section2"
+    >
+      <div
+        class="container mx-auto px-6 relative z-10 h-full flex flex-col items-center justify-center"
+      >
+        <p
+          class="pt-5 text-xl text-center mb-8 opacity-1 transition-opacity duration-500"
+          id="instruction-message0"
+        >
+          اضغط ضغطة مطوله على منتجنا
+        </p>
+        <p
+          class="text-xl text-center mb-8 opacity-0 transition-opacity duration-500"
+          id="instruction-message"
+        >
+          ضع منتجنا في الغسالة
+        </p>
+        <div
+          class="grid grid-cols-2 lg:grid-cols-5 gap-y-6 gap-x-8 text-white text-center"
+        >
+          <div
+            class="bg-white/10 border border-white/20 backdrop-blur-xl shadow-xl rounded-xl p-4 flex flex-col items-center"
+          >
+            <i class="fas fa-certificate text-white text-2xl mb-2"></i>
+            <span>حاصل على شهادة ISO</span>
+          </div>
+
+          <div
+            class="bg-white/10 border border-white/20 backdrop-blur-xl shadow-xl rounded-xl p-4 flex flex-col items-center"
+          >
+            <i class="fas fa-map-marker-alt text-green-400 text-2xl mb-2"></i>
+            <span>صنع في تركيا</span>
+          </div>
+
+          <div
+            class="bg-white/10 border border-white/20 backdrop-blur-xl shadow-xl rounded-xl p-4 flex flex-col items-center"
+          >
+            <i class="fas fa-industry text-cyan-400 text-2xl mb-2"></i>
+            <span>طاقة إنتاجية عالية</span>
+          </div>
+
+          <div
+            class="bg-white/10 border border-white/20 backdrop-blur-xl shadow-xl rounded-xl p-4 flex flex-col items-center"
+          >
+            <i class="fas fa-globe text-blue-400 text-2xl mb-2"></i>
+            <span>طلبات دولية</span>
+          </div>
+
+          <div
+            class="bg-white/10 border border-white/20 backdrop-blur-xl shadow-xl rounded-xl p-4 flex flex-col items-center"
+          >
+            <i class="fas fa-map-marker-alt text-green-400 text-2xl mb-2"></i>
+            <span>منتج تركي</span>
+          </div>
+        </div>
+
+        <div class="relative w-full flex-grow flex items-center justify-around">
+          <img
+            alt="غسالة صحون"
+            class="w-1/2 max-w-xs h-auto transition-transform duration-300"
+            id="dishwasher"
+            src="./mashin.png"
+          />
+          <div
+            class="absolute inset-0"
+            id="bubble-container"
+          ></div>
+          <img
+            alt="كيس المنتج"
+            class="w-1/3 max-w-[200px] h-auto cursor-grab transition-all duration-300 absolute"
+            id="product-bag"
+            src="./kabsulBag.png"
+            style="left: 10%; top: 40%"
+          />
+          <img
+            alt="صحون نظيفة"
+            class="absolute inset-0 m-auto w-3/4 max-w-md h-auto opacity-0 pointer-events-none"
+            id="clean-dishes"
+            src="./cup.png"
+          />
+        </div>
+        <div
+          class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0 transition-opacity duration-500"
+          id="reset-container"
+        >
+          <button
+            class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300"
+            id="reset-button"
+          >
+            جولة تنظيف ثانية؟
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const section1 = document.getElementById("section1");
+      const section2 = document.getElementById("section2");
+      let currentSection = 1;
+      window.addEventListener("wheel", (event) => {
+        if (event.deltaY > 0 && currentSection === 1) {
+          section1.classList.remove("active");
+          section2.classList.add("active");
+          currentSection = 2;
+          document.body.scrollTo({
+            top: window.innerHeight,
+            behavior: "smooth",
+          });
+        } else if (event.deltaY < 0 && currentSection === 2) {
+          section1.classList.add("active");
+          section2.classList.remove("active");
+          currentSection = 1;
+          document.body.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+      const productBag = document.getElementById("product-bag");
+      const dishwasher = document.getElementById("dishwasher");
+      const instructionMessage = document.getElementById("instruction-message");
+      const instructionMessage0 = document.getElementById(
+        "instruction-message0"
+      );
+      const bubbleContainer = document.getElementById("bubble-container");
+      const cleanDishes = document.getElementById("clean-dishes");
+      const resetContainer = document.getElementById("reset-container");
+      const resetButton = document.getElementById("reset-button");
+      let isDragging = false;
+      let offsetX, offsetY;
+      productBag.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        productBag.classList.add("dragging");
+        instructionMessage.style.opacity = "1";
+        instructionMessage0.style.opacity = "0";
+        // Convert page coordinates to element's parent coordinates
+        const parentRect = productBag.parentElement.getBoundingClientRect();
+        offsetX = e.clientX - productBag.getBoundingClientRect().left;
+        offsetY = e.clientY - productBag.getBoundingClientRect().top;
+      });
+      document.addEventListener("mouseup", () => {
+        if (isDragging) {
+          isDragging = false;
+          productBag.classList.remove("dragging");
+          instructionMessage.style.opacity = "0";
+          instructionMessage0.style.opacity = "1";
+        }
+      });
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const parentRect = productBag.parentElement.getBoundingClientRect();
+          let newX = e.clientX - parentRect.left - offsetX;
+          let newY = e.clientY - parentRect.top - offsetY;
+          // Constrain movement within the parent
+          newX = Math.max(
+            0,
+            Math.min(newX, parentRect.width - productBag.offsetWidth)
+          );
+          newY = Math.max(
+            0,
+            Math.min(newY, parentRect.height - productBag.offsetHeight)
+          );
+          productBag.style.left = `${newX}px`;
+          productBag.style.top = `${newY}px`;
+          checkCollision();
+        }
+      });
+      function checkCollision() {
+        const bagRect = productBag.getBoundingClientRect();
+        const dishwasherRect = dishwasher.getBoundingClientRect();
+        const overlap = !(
+          bagRect.right < dishwasherRect.left ||
+          bagRect.left > dishwasherRect.right ||
+          bagRect.bottom < dishwasherRect.top ||
+          bagRect.top > dishwasherRect.bottom
+        );
+        if (overlap) {
+          isDragging = false;
+          productBag.classList.remove("dragging");
+          productBag.style.opacity = "0";
+          instructionMessage.style.opacity = "0";
+          startAnimationSequence();
+        }
+      }
+      function startAnimationSequence() {
+        // 1. Drop capsules
+        for (let i = 0; i < 10; i++) {
+          const capsule = document.createElement("div");
+          capsule.className = "capsule";
+          // Start capsules from where the bag was
+          capsule.style.left = productBag.style.left;
+          capsule.style.top = productBag.style.top;
+          // Randomize horizontal position slightly
+          capsule.style.transform = `translateX(${
+            (Math.random() - 0.5) * 40
+          }px)`;
+          productBag.parentElement.appendChild(capsule);
+          setTimeout(() => capsule.remove(), 1000);
+        }
+        // 2. Shake dishwasher and show bubbles
+        setTimeout(() => {
+          dishwasher.classList.add("shaking");
+          for (let i = 0; i < 30; i++) {
+            const bubble = document.createElement("div");
+            bubble.className = "bubble";
+            const size = Math.random() * 20 + 5;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            // Position bubbles around the dishwasher
+            bubble.style.left = `${
+              dishwasher.offsetLeft + Math.random() * dishwasher.offsetWidth
+            }px`;
+            bubble.style.top = `${
+              dishwasher.offsetTop + Math.random() * dishwasher.offsetHeight
+            }px`;
+            bubble.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+            bubble.style.animationDelay = `${Math.random() * 1}s`;
+            bubbleContainer.appendChild(bubble);
+          }
+        }, 500);
+        // 3. Stop animation and show clean dishes
+        setTimeout(() => {
+          dishwasher.classList.remove("shaking");
+          dishwasher.style.opacity = "0";
+          bubbleContainer.style.opacity = "0";
+          cleanDishes.style.opacity = "1";
+          resetContainer.style.opacity = "1";
+        }, 3500);
+      }
+      function resetAnimation() {
+        instructionMessage0.style.opacity = "1";
+        cleanDishes.style.opacity = "0";
+        resetContainer.style.opacity = "0";
+        bubbleContainer.innerHTML = "";
+        bubbleContainer.style.opacity = "1";
+        dishwasher.style.opacity = "1";
+        productBag.style.opacity = "1";
+        productBag.style.left = "10%";
+        productBag.style.top = "40%";
+      }
+      resetButton.addEventListener("click", resetAnimation);
+      // Make the logic work for touch devices
+      productBag.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        productBag.classList.add("dragging");
+        instructionMessage.style.opacity = "1";
+        const touch = e.touches[0];
+        offsetX = touch.clientX - productBag.getBoundingClientRect().left;
+        offsetY = touch.clientY - productBag.getBoundingClientRect().top;
+        e.preventDefault();
+      });
+      document.addEventListener("touchend", () => {
+        if (isDragging) {
+          isDragging = false;
+          productBag.classList.remove("dragging");
+          instructionMessage.style.opacity = "0";
+        }
+      });
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          if (isDragging) {
+            const touch = e.touches[0];
+            const parentRect = productBag.parentElement.getBoundingClientRect();
+            let newX = touch.clientX - parentRect.left - offsetX;
+            let newY = touch.clientY - parentRect.top - offsetY;
+            newX = Math.max(
+              0,
+              Math.min(newX, parentRect.width - productBag.offsetWidth)
+            );
+            newY = Math.max(
+              0,
+              Math.min(newY, parentRect.height - productBag.offsetHeight)
+            );
+            productBag.style.left = `${newX}px`;
+            productBag.style.top = `${newY}px`;
+            checkCollision();
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+    </script>
   </body>
 </html>
