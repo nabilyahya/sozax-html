@@ -143,31 +143,36 @@
     >
       <div class="container mx-auto px-6 py-12 relative z-10">
         <header class="mb-8">
-          <h1 class="text-6xl font-bold">SÖZAX</h1>
+          <h1 class="text-2xl md:text-6xl font-bold">SÖZAX</h1>
         </header>
         <main>
           <section
             class="text-center md:text-right md:flex md:items-center md:justify-between"
           >
             <div class="md:w-1/2 md:pr-10">
-              <h2 class="text-5xl md:text-5xl font-bold leading-tight mb-4">
+              <h2
+                class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4"
+              >
                 كبسولات غسيل صحون قوية ومبتكرة
               </h2>
               <p class="text-lg text-gray-300 mb-8">
                 تجمع بين المنظف ومساعد الشطف وملمع الصحون
               </p>
-              <div class="flex gap-4">
+              <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
                 <a
-                  class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300 inline-block"
                   href="#"
-                  >اطلب الآن</a
+                  class="inline-flex items-center justify-center bg-yellow-400 text-gray-900 font-bold text-md px-4 py-2 rounded-md md:text-lg md:px-8 md:py-3 md:rounded-lg hover:bg-yellow-500 transition duration-300 whitespace-nowrap"
                 >
+                  اطلب الآن
+                </a>
+
                 <a
-                  class="border-2 border-yellow-400 text-yellow-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-400 hover:text-gray-900 transition duration-300 inline-block"
                   href="path-to-details.pdf"
                   download
-                  >تحميل التفاصيل</a
+                  class="inline-flex items-center justify-center border-2 border-yellow-400 text-yellow-400 font-bold text-md px-4 py-2 rounded-md md:text-lg md:px-8 md:py-3 md:rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition duration-300 whitespace-nowrap"
                 >
+                  تحميل التفاصيل
+                </a>
               </div>
             </div>
 
@@ -179,7 +184,7 @@
               />
             </div>
           </section>
-          <section class="mt-16">
+          <section class="hidden md:block mt-16">
             <ul class="space-y-4 text-3xl">
               <li class="flex items-center">
                 <span class="material-icons text-green-400 mr-3"
@@ -202,7 +207,7 @@
             </ul>
           </section>
           <div
-            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce"
+            class="absolute bottom-6 left-[150px] md:left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce"
           >
             <span class="text-sm">اسحب للأسفل</span>
             <span class="material-icons">keyboard_arrow_down</span>
@@ -266,6 +271,17 @@
             <i class="fas fa-map-marker-alt text-green-400 text-2xl mb-2"></i>
             <span>منتج تركي</span>
           </div>
+          <div
+            class="md:hidden flex flex-col items-center opacity-0"
+            id="reset-container"
+          >
+            <button
+              class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300"
+              id="reset-button"
+            >
+              جولة تنظيف ثانية؟
+            </button>
+          </div>
         </div>
 
         <div class="relative w-full flex-grow flex items-center justify-around">
@@ -298,7 +314,7 @@
           id="reset-container"
         >
           <button
-            class="bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300"
+            class="hidden md:block bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-lg text-lg hover:bg-yellow-500 transition duration-300"
             id="reset-button"
           >
             جولة تنظيف ثانية؟
