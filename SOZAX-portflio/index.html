@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>عرض منتج SÖZAX</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* اضبط الألوان هنا إن أردت */
+        --bg: #f7f7f9;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #d92332; /* أحمر */
+        --accent: #0ea5e9; /* أزرق */
+        --lemon: #f59e0b; /* أصفر/ليموني */
+        --mint: #10b981; /* أخضر */
+        --card: #ffffff;
+        --border: #e5e7eb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: "Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          "Noto Sans", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.85;
+      }
+      .container {
+        max-width: 960px;
+        margin-inline: auto;
+        padding: 24px;
+      }
+      .hero {
+        background: radial-gradient(
+          1200px 400px at 50% -10%,
+          #ffffff,
+          var(--bg)
+        );
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px 28px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        margin-block: 20px 28px;
+      }
+      /* تخطيط الصورة يسار والنص يمين */
+      .hero-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 24px;
+      }
+      .hero-text {
+        flex: 1 1 0%;
+      }
+      .hero-image {
+        flex: 0 0 260px;
+      }
+      .hero-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        object-fit: contain;
+        display: block;
+      }
+      @media (max-width: 720px) {
+        .hero-flex {
+          flex-direction: column;
+          text-align: center;
+        }
+        .hero-image {
+          flex: unset;
+          max-width: 320px;
+          width: 100%;
+          margin-inline: auto;
+        }
+      }
+
+      .title {
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 700;
+        margin: 0 0 6px;
+        color: #0f172a;
+        letter-spacing: 0.2px;
+      }
+      .subtitle {
+        font-size: clamp(18px, 2.7vw, 22px);
+        color: var(--primary);
+        font-weight: 700;
+        margin: 2px 0 14px;
+      }
+      .red {
+        color: var(--primary);
+      }
+      .lead {
+        font-size: clamp(15px, 2.6vw, 18px);
+        color: var(--muted);
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .col-12 {
+        grid-column: span 12;
+      }
+      .col-6 {
+        grid-column: span 12;
+      }
+      .col-4 {
+        grid-column: span 12;
+      }
+      @media (min-width: 720px) {
+        .col-6 {
+          grid-column: span 6;
+        }
+        .col-4 {
+          grid-column: span 4;
+        }
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 22px 18px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+      }
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        color: #0f172a;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px dashed var(--border);
+        font-size: 14px;
+        color: #111827;
+        margin: 4px 6px 8px 0;
+        white-space: nowrap;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 10px;
+        color: #111827;
+        background: #f3f4f6;
+        border: 1px solid var(--border);
+        margin: 4px 6px 0 0;
+      }
+      ul {
+        margin: 10px 0 0;
+        padding: 0 22px 0 0;
+      }
+      li {
+        margin: 6px 0;
+      }
+      .capsule-spec {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        margin: 8px 0;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .red {
+        background: var(--primary);
+      }
+      .yellow {
+        background: var(--lemon);
+      }
+      .blue {
+        background: var(--accent);
+      }
+      .green {
+        background: var(--mint);
+      }
+      .black {
+        background: var(--text);
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 4px 0 10px;
+        color: #0f172a;
+      }
+      .note {
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 24px 0;
+        border-radius: 1px;
+      }
+      .list-tight li {
+        margin: 4px 0;
+      }
+
+      /* === جدول عصري خفيف داخل الكارت (مناسب للثيم الفاتح) === */
+      .table-wrap {
+        margin-top: 14px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: auto;
+        background: var(--card);
+      }
+      .table-modern {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed; /* يجبر الأعمدة تتوزع بالتساوي */
+        word-wrap: break-word;
+        /*min-width: 640px;  للتمرير الأفقي عند الشاشات الضيقة جدًا */
+      }
+      .table-modern thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        text-align: right;
+        font-weight: 700;
+        color: #0f172a;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(14, 165, 233, 0.12),
+          rgba(14, 165, 233, 0.04)
+        ); /* لمسة زرقاء خفيفة */
+        backdrop-filter: blur(4px);
+        font-size: 14px;
+      }
+      .table-modern tbody td {
+        padding: 12px 14px;
+        border-top: 1px solid var(--border);
+        vertical-align: top;
+        color: var(--text);
+        background: #fff;
+        font-size: 14px;
+      }
+      .table-modern tbody tr:nth-child(even) td {
+        background: #fafafa;
+      }
+      .table-modern tbody tr:hover td {
+        background: #f0f9ff;
+      }
+      /* عمود الشكل مع شارة */
+      .shape-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        padding: 0 10px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+          0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+      .b1 {
+        background: linear-gradient(135deg, var(--accent), #60a5fa);
+      }
+      .b2 {
+        background: linear-gradient(135deg, var(--mint), #34d399);
+      }
+      .b3 {
+        background: linear-gradient(135deg, var(--lemon), #fbbf24);
+      }
+      .desc {
+        color: var(--muted);
+      }
+      .weight {
+        white-space: nowrap;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      /* استجابة للموبايل: تحويل الصف لبطاقة */
+      @media (max-width: 640px) {
+        .table-modern,
+        .table-modern thead,
+        .table-modern tbody,
+        .table-modern th,
+        .table-modern td,
+        .table-modern tr {
+          display: block;
+        }
+        .table-modern thead {
+          display: none;
+        }
+        .table-modern tbody tr {
+          background: #fff;
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          margin: 10px;
+          overflow: hidden;
+        }
+        .table-modern tbody td {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          border-top: 1px solid var(--border);
+        }
+        .table-modern tbody td:first-child {
+          border-top: none;
+        }
+        .table-modern tbody td::before {
+          content: attr(data-label);
+          color: #475569;
+          font-weight: 700;
+          font-size: 12px;
+        }
+        .weight {
+          white-space: normal;
+        }
+      }
+      .table-modern td,
+      .table-modern th {
+        word-break: break-word;
+        white-space: normal;
+      }
+
+      /* طباعة */
+      @media print {
+        body {
+          background: #fff;
+        }
+        .hero {
+          box-shadow: none;
+          border: none;
+        }
+        .card {
+          break-inside: avoid;
+        }
+        .container {
+          max-width: 100%;
+          padding: 0;
+        }
+        .divider {
+          margin: 16px 0;
+        }
+        .table-wrap {
+          border: 1px solid #ddd;
+        }
+        .table-modern thead th {
+          background: #eee !important;
+        }
+        .table-modern tbody tr:hover td {
+          background: #fff;
+        }
+      }
+      .box-illustration {
+        position: relative;
+        margin: 18px auto 0;
+        max-width: 520px; /* عدّل الحجم العام إن رغبت */
+        background: var(--card, #fff);
+        border: 1px solid var(--border, #e5e7eb);
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+      }
+
+      .box-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        user-select: none;
+      }
+
+      .dims-overlay {
+        position: absolute;
+        inset: 12px; /* يطابق padding الحاوية */
+        width: calc(100% - 24px);
+        height: calc(100% - 24px);
+        pointer-events: none; /* حتى ما تعيق سحب الصفحة */
+      }
+
+      .box-caption {
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted, #64748b);
+        margin-top: 8px;
+      }
+
+      /* طباعة (اختياري) */
+      @media print {
+        .box-illustration {
+          box-shadow: none;
+          border-color: #ddd;
+        }
+      }
+      .image-center {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .image-center img {
+        width: 150px; /* حجم الصورة */
+        height: auto;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <!-- Hero -->
+      <section class="hero hero-flex">
+        <div class="hero-text">
+          <h1 class="title">بطاقة تعريف منتج SÖZAX</h1>
+          <h2 class="subtitle">أقراص SÖZAX لتنظیف أدوات المطبخ</h2>
+          <p class="lead">
+            حل مبتكر وقوي لتنظیف أدوات المطبخ أينما وجدت<br />
+            منشئات , مؤسسات , مراكز الخدمات , وجهات سياحية, و ...
+          </p>
+          <div class="meta" style="margin-top: 12px">
+            <span class="tag" style="color: #d92332">خالٍ من الأملاح</span>
+            <span class="tag" style="color: #d92332">مكوّنات آمنة للطعام</span>
+            <span class="tag" style="color: #d92332">نتيجة من أول استخدام</span>
+          </div>
+        </div>
+        <div class="hero-image">
+          <!-- غيّر المسار أدناه لصورة المنتج -->
+          <img src="./kabsul.jpeg" alt="صورة منتج SÖZAX" />
+        </div>
+      </section>
+
+      <!-- المزايا + التكوين -->
+      <section class="grid">
+        <div class="card col-6">
+          <h3>ممیزات المنتج</h3>
+          <p>
+            منتج <span style="color: #2765f5; font-weight: 700">SÖZAX</span> ھو
+            قرص تنظیف متطور مخصص لماكینات الجلي المنزلية والصناعية ، یجمع بین
+            القوة والابتكار لیمنحك نتائج مذھلة منذ أول استخدام.
+          </p>
+
+          <div class="divider"></div>
+          <div class="section-title">مكوّنات المنتج</div>
+          <h4>تركيبة فريدة تضم ثلاث سوائل قوية ومسحوق فعال</h4>
+          <div class="capsule-spec">
+            <span class="dot red"></span>
+            <div>
+              <strong style="color: #d92332">السائل الأحمر:</strong> یذیب الدھون
+              المستعصیة.
+            </div>
+          </div>
+          <div class="capsule-spec">
+            <span class="dot yellow"></span>
+            <div>
+              <strong style="color: #f59e0b">السائل الأصفر:</strong>يكسر جزئيات
+              الأوساخ الصلبة ويزيل الروائح الكريهة , مع لمسة خفيفة من رائهة
+              الليمون المنعشة التي لاتترك أي أثر بعد الغسيل
+            </div>
+          </div>
+          <div class="capsule-spec">
+            <span class="dot blue"></span>
+            <div>
+              <strong style="color: #0ea5e9">السائل الأزرق:</strong> سر اللمعان
+              المبھر للكؤوس والأطباق.
+            </div>
+          </div>
+          <div class="capsule-spec">
+            <!-- <span class="dot black"></span> -->
+            <div>
+              <strong>مسحوق:</strong> يحتوي على خل تفاح، أحماض أمینیة،
+              وبیكربونات الصودیوم تقضي على الفطریات وتضمن نظافة مثالیة.
+            </div>
+          </div>
+
+          <div class="image-center">
+            <img src="./kabsulBag.png" alt="صورة المسحوق" />
+          </div>
+        </div>
+
+        <div class="card col-6">
+          <h3>التعبئة والتغليف</h3>
+          <!-- ===== الجدول المضاف هنا ===== -->
+          <div class="table-wrap" aria-label="جدول أشكال التعبئة">
+            <table class="table-modern">
+              <thead>
+                <tr>
+                  <th scope="col">الشكل</th>
+                  <th scope="col">الوصف</th>
+                  <th scope="col">الوزن</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="shape-cell" data-label="الشكل">
+                    <span class="badge b1">كبسولة</span>
+                  </td>
+                  <td class="desc" data-label="الوصف">
+                    ذات حجم 6.50 سم * 4.50 سم شكل شعلة صغيرة تحتوي على ثلاث
+                    سوائل وبودرة مغطى بغلاف جيلاتيني
+                  </td>
+                  <td class="weight" data-label="الوزن">17.30 g تقريبًا</td>
+                </tr>
+                <tr>
+                  <td class="shape-cell" data-label="الشكل">
+                    <span class="badge b2">مغلف</span>
+                  </td>
+                  <td class="desc" data-label="الوصف">
+                    كيس ألمينيوم يحتوي على عدد 33 كبسولة
+                  </td>
+
+                  <td class="weight" data-label="الوزن">571 g تقريبًا</td>
+                </tr>
+                <tr>
+                  <td class="shape-cell" data-label="الشكل">
+                    <span class="badge b3">الطرد</span>
+                  </td>
+                  <td class="desc" data-label="الوصف">
+                    صندوق كرتون يحتوي على 7 مغلف
+                  </td>
+                  <td class="weight" data-label="الوزن">4.10 kg تقريباً</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- عرض أبعاد الصندوق (تحت الجدول) -->
+            <figure class="box-illustration" aria-label="أبعاد الصندوق">
+              <img src="box.png" alt="صندوق كرتوني" class="box-image" />
+
+              <!-- طبقة الأسهم والقياسات -->
+              <svg
+                class="dims-overlay"
+                viewBox="0 0 1000 600"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <!-- أسلوب الأسهم -->
+                <defs>
+                  <marker
+                    id="arrow"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="4"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M0,0 L8,4 L0,8 z" fill="#0ea5e9"></path>
+                  </marker>
+                </defs>
+
+                <!-- العرض (أفقي) -->
+                <line
+                  x1="150"
+                  y1="520"
+                  x2="850"
+                  y2="520"
+                  stroke="#0ea5e9"
+                  stroke-width="3"
+                  marker-start="url(#arrow)"
+                  marker-end="url(#arrow)"
+                />
+                <rect
+                  x="470"
+                  y="490"
+                  rx="6"
+                  ry="6"
+                  width="110"
+                  height="28"
+                  fill="rgba(255,255,255,0.9)"
+                  stroke="#0ea5e9"
+                />
+                <text
+                  x="525"
+                  y="510"
+                  text-anchor="middle"
+                  font-size="16"
+                  fill="#0f172a"
+                >
+                  العرض: 20 سم
+                </text>
+
+                <!-- الطول (عمق الصندوق، مائل قليلاً) -->
+                <line
+                  x1="820"
+                  y1="450"
+                  x2="930"
+                  y2="320"
+                  stroke="#22c55e"
+                  stroke-width="3"
+                  marker-start="url(#arrow)"
+                  marker-end="url(#arrow)"
+                />
+                <rect
+                  x="860"
+                  y="345"
+                  rx="6"
+                  ry="6"
+                  width="120"
+                  height="28"
+                  fill="rgba(255,255,255,0.9)"
+                  stroke="#22c55e"
+                />
+                <text
+                  x="920"
+                  y="365"
+                  text-anchor="middle"
+                  font-size="16"
+                  fill="#0f172a"
+                >
+                  الطول: 40 سم
+                </text>
+
+                <!-- الارتفاع (عمودي) -->
+                <line
+                  x1="120"
+                  y1="120"
+                  x2="120"
+                  y2="480"
+                  stroke="#f59e0b"
+                  stroke-width="3"
+                  marker-start="url(#arrow)"
+                  marker-end="url(#arrow)"
+                />
+                <rect
+                  x="70"
+                  y="285"
+                  rx="6"
+                  ry="6"
+                  width="120"
+                  height="28"
+                  fill="rgba(255,255,255,0.9)"
+                  stroke="#f59e0b"
+                />
+                <text
+                  x="130"
+                  y="305"
+                  text-anchor="middle"
+                  font-size="16"
+                  fill="#0f172a"
+                >
+                  الارتفاع: 30 سم
+                </text>
+              </svg>
+              <figcaption class="box-caption">
+                أبعاد الصندوق (قابلة للتعديل)
+              </figcaption>
+            </figure>
+          </div>
+          <!-- ===== نهاية الجدول ===== -->
+        </div>
+      </section>
+
+      <!-- شروط + شهادات -->
+      <section class="grid" style="margin-top: 18px">
+        <div class="card col-12">
+          <h3>شروط الدفع</h3>
+          <ul class="list-tight">
+            <li>%30 دفعة أولى بعد إثبات طلب بكمیة 22 طن</li>
+            <li>%50 عند تحمیل الحاویة</li>
+            <li>إغلاق الرصید قبل التحمیل بیوم أو یومین</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <h3>الشھادات</h3>
+          <ul class="list-tight">
+            <li>شھادة التركیب الكیمیائي</li>
+            <li>شھادة الاستخدام والاستھلاك</li>
+          </ul>
+        </div>
+
+        <!-- <div class="card col-6"></div> -->
+      </section>
+
+      <!-- تواصل -->
+      <section class="card" style="margin-top: 18px">
+        <h3>معلومات التواصل</h3>
+        <p>الھاتف والبرید الإلكتروني متوفران عند الطلب.</p>
+        <p class="note">
+          للحصول على عروض خاصة بالكميات الكبيرة أو التخصيص بالعلامة التجارية،
+          يُرجى التواصل.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
